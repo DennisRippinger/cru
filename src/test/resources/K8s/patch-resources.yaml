@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: some-application
+spec:
+  template:
+    spec:
+      containers:
+        - name: container_one
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 1Gi
+            requests:
+              # cru: container=container_one cluster=Cluster1
+              cpu: 670m
+              # cru: container=container_one cluster=Cluster1
+              memory: 1021Mi
+        - name: container_two
+          resources:
+            requests:
+              # cru: container=container_two cluster=Cluster1
+              cpu: 298m
+              # cru: container=container_two cluster=Cluster1
+              memory: 40Mi
