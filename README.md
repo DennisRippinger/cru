@@ -24,7 +24,7 @@ k8s:
       namespace: "non-prod-namespace"
 ```
 
-Where a Needed could look like this:
+Where a Needle could look like this:
 
 ```yaml
       containers:
