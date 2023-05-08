@@ -17,13 +17,48 @@
  * under the License.
  */
 
-package dev.cru.repository;
+package dev.cru.repository.gitlab;
 
+import dev.cru.conf.RepoConfig;
 import dev.cru.conf.Repository;
 import dev.cru.context.Location;
+import dev.cru.repository.RepositoryApi;
+import java.util.List;
 
-public interface RepositoryApi {
-	Iterable<Repository> findRepositories();
+public class GitLabMockRepositoryApi implements RepositoryApi {
 
-	Iterable<Location> readLocationsFrom(Repository repository);
+	@Override
+	public Iterable<Repository> findRepositories() {
+		return List.of(
+			new Repository(
+				"12345",
+				new RepoConfig(
+					new RepoConfig.K8s(
+						List.of(
+							new RepoConfig.K8sLocation(
+								"kustomize/overlays/prod/patch-resources.yaml",
+								"prod-clsuter",
+								"prod-namespace",
+								null,
+								null
+							),
+							new RepoConfig.K8sLocation(
+								"kustomize/overlays/non-prod/patch-resources.yaml",
+								"prod-clsuter",
+								"non-prod-cluster",
+								null,
+								null
+							)
+						)
+					),
+					null
+				)
+			)
+		);
+	}
+
+	@Override
+	public Iterable<Location> readLocationsFrom(Repository repository) {
+		return null;
+	}
 }
